@@ -15,7 +15,7 @@ then run `docker build -t biojulia .`.
 Once the biojulia image is built, you can run `docker run -it --rm biojulia` to
 start a Julia session:
 
-    ~/m/docker-biojulia $ docker run -it --rm biojulia
+    ~/m/docker-biojulia $ docker run -it --rm biojulia julia
                    _
        _       _ _(_)_     |  A fresh approach to technical computing
       (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
