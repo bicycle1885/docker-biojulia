@@ -1,51 +1,65 @@
-# Install BioJulia packages and other useful packages.
+# Initialize the package directory.
+Pkg.init()
 
-packages = [
-    # BioJulia packages
-    "BioAlignments",
-    "BioSequences",
-    "BioSymbols",
-    "GeneticVariation",
-    "GenomicFeatures",
+# Create REQUIRE file.
+write(
+Pkg.dir("REQUIRE"),
+"""
+# BioJulia packages
+BioAlignments
+BioSequences
+BioSymbols
+GeneticVariation
+GenomicFeatures
 
-    # Statistics
-    "DataFrames",
-    "Distances",
-    "Distributions",
-    "MultivariateStats",
-    "StatsBase",
-    "StatsFuns",
-    "GLM",
+# Statistics
+DataFrames
+Distances
+Distributions
+GLM
+KernelDensity
+MultivariateStats
+StatsBase
+StatsFuns
 
-    # Compression/decompression tools
-    "CodecBzip2",
-    "CodecXz",
-    "CodecZlib",
-    "CodecZstd",
+# Numerical analysis
+DiffBase
+ForwardDiff
+Interpolations
+Optim
+ReverseDiff
+SpecialFunctions
 
-    # Common file formats
-    "CSV",
-    "EzXML",
-    "Feather",
-    "JLD2",
-    "JSON",
-    "YAML",
+# Compression/decompression tools
+CodecBzip2
+CodecXz
+CodecZlib
+CodecZstd
 
-    # Misc. useful packages
-    "Combinatorics",
-    "DocOpt",
-    "Formatting",
-    "Gadfly",
-    "Images",
-    "Interpolations",
-    "IterTools",
-    "SpecialFunctions",
-]
+# Common file formats
+CSV
+EzXML
+Feather
+JLD2
+JSON
+YAML
 
+# Misc. useful packages
+Combinatorics
+DocOpt
+Formatting
+IJulia
+Images
+IterTools
+""")
+
+# Update METADATA.
 Pkg.update()
-for pkgname in packages
-    # install
-    Pkg.add(pkgname)
-    # precompile
+
+# Install packages listed in REQUIRE.
+Pkg.resolve()
+
+# Precompile installed packages.
+for pkgname in keys(Pkg.installed())
     eval(:(import $(Symbol(pkgname))))
 end

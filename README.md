@@ -9,13 +9,16 @@ This Dockerfile is based on Julia 0.6 and installs major packages listed below.
 - GeneticVariation.jl
 - GenomicFeatures.jl
 
+This also installs [IJulia.jl](https://github.com/JuliaLang/IJulia.jl) and other
+useful packages for bioinformatics.
+
 To build a new docker image, install [Docker](<https://www.docker.com/>) and
 then run `docker build -t biojulia .`.
 
 Once the biojulia image is built, you can run `docker run -it --rm biojulia` to
 start a Julia session:
 
-    ~/m/docker-biojulia $ docker run -it --rm biojulia julia
+    $ docker run -it --rm biojulia
                    _
        _       _ _(_)_     |  A fresh approach to technical computing
       (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
@@ -31,3 +34,10 @@ start a Julia session:
     5nt DNA Sequence:
     ACGTN
 
+To run your script in the current directory:
+
+    $ docker run --rm -v $(pwd):/workdir biojulia myscript.jl
+
+To start Jupyter Notebook:
+
+    $ docker run --rm -p 8888:8888 --entrypoint jupyter biojulia notebook --ip=0.0.0.0 --allow-root
