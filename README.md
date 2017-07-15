@@ -1,6 +1,8 @@
 Dockerfile for BioJulia
 =======================
 
+[docker-biojulia](https://github.com/bicycle1885/docker-biojulia)
+
 This Dockerfile is based on Julia 0.6 and installs major packages listed below.
 
 - BioAlignments.jl
